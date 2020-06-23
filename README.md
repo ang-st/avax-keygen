@@ -1,4 +1,5 @@
-# ava-keygen
+# AVA Keygen
+For use with token sale. A simple single page application that lets users create a key/address pair, and download a keystore file.
 
 ## Project setup
 ```

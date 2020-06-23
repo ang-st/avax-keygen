@@ -1,0 +1,101 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+
+.but_primary{
+  background-color: #E84142;
+  color: #fff;
+  border-radius: 4px;
+  width: max-content;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+
+  img{
+    filter: hue(#E84142)
+  }
+}
+
+.but_subtle{
+  background-color: transparent;
+  border: none;
+  color: #909090;
+  margin: 30px;
+}
+
+input{
+  display: block;
+  width: auto;
+  width: 100%;
+
+  &[type="text"], &[type="password"]{
+    background-color: #f2f2f2;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 14px;
+    margin: 12px 0px;
+    outline-color: #E04D4D;
+  }
+}
+
+
+.link_primary{
+  position: relative;
+  color: #E04D4D !important;
+  margin: 0px auto;
+  display: block;
+  width: max-content;
+  background-color: #FFF3FC;
+  border: 1px solid #E04D4D !important;
+  padding: 8px 30px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+
+  img{
+    position: absolute;
+    left: 20px;
+    margin: 0;
+    margin-right: 10px;
+    max-height: 1rem;
+    float: left;
+  }
+}
+
+.but_primary, .link_primary{
+  &[disabled]{
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #eee;
+    color: #999 !important;
+    border-color: #999 !important;
+
+    img{
+      filter: grayscale(100%);
+    }
+  }
+}
+
+
+label{
+  text-align: left;
+  font-weight: bold;
+  font-size: 0.8rem;
+  display: block;
+}
+
+p{
+  text-align: left;
+}
+
+
+
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
