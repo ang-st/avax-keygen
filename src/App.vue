@@ -7,8 +7,12 @@
 <style lang="scss">
     @import "main";
 
-    html, body, #app{
+    html, body{
         height: 100%;
+    }
+
+    #app{
+        min-height: 100%;
     }
 
     #app {

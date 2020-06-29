@@ -7,6 +7,7 @@
         </b-row>
         <b-row align-v="center">
             <b-col md="7">
+                <img src="@/assets/addr_copy.svg">
                 <p class="addr">{{address}}</p>
             </b-col>
 <!--            <b-col md="4" class="right_col" offset-md="1">-->
@@ -25,7 +26,12 @@
     .addr{
         padding: 10px;
         text-align: center;
-        border: 1px solid #eee;
+        border: 1px solid #CDCDCD;
         border-radius: 8px;
+    }
+
+    img{
+        max-height: 70px;
+        margin-bottom: 20px;
     }
 </style>

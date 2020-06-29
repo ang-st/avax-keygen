@@ -7,10 +7,11 @@
             <div class="words">
                 <div v-for="i in 24" :key="i" class="mnemonic_in" tabindex="-1">
                     <p>{{i}}.</p>
-                    <input type="text" v-model="keysIn[i-1]">
+                    <input type="text" v-model="keysIn[i-1]" :disabled="!hiddenIndeces.includes(i-1)">
                 </div>
             </div>
-            <button class="but_primary">Verify</button>
+            <p class="err">{{err}}</p>
+            <button class="but_primary" @click="verify">Verify</button>
         </div>
     </div>
 </template>
@@ -20,11 +21,32 @@
             return {
                 isActive: false,
                 keysIn: [],
+                hiddenIndeces: [],
+                err: "",
             }
         },
         created(){
-            var n = 24;
-            this.keysIn = Array(n).join(".").split(".");
+            var wordsLen = 24;
+            this.keysIn = Array(wordsLen).join(".").split(".");
+
+            // Hide 4 words
+            let hideNum = 4;
+            let hidden = [];
+
+            while(hidden.length < hideNum){
+                let hideIndex = Math.floor(Math.random() * wordsLen);
+                if(!hidden.includes(hideIndex)){
+                    hidden.push(hideIndex)
+                }
+            }
+
+            this.words.forEach((word,i) => {
+                if(!hidden.includes(i)){
+                    this.keysIn[i] = word
+                }
+            });
+
+            this.hiddenIndeces = hidden;
         },
         props: {
             mnemonic: String
@@ -38,8 +60,29 @@
             close(){
                 this.isActive = false;
             },
-            verify(){
+            formCheck(){
+                this.err = "";
+                let userWords = this.keysIn;
 
+                for(var i=0;i<userWords.length; i++){
+                    let userWord = userWords[i].trim();
+                    let trueWord = this.words[i].trim();
+
+                    if(userWord !== trueWord){
+                        this.err = "The mnemonic phrase you entered does not match the actual phrase.";
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+            verify(){
+                if(!this.formCheck()) return;
+
+
+
+                this.close();
+                this.$emit('complete');
             }
         }
     }
@@ -98,6 +141,7 @@
         flex-direction: row;
         align-items: center;
         border-bottom: 1px solid #666;
+        outline: none;
         /*outline: 2px solid #E84142;*/
         /*border-radius: 2px;*/
 
@@ -112,6 +156,12 @@
             border: none;
             width: 40px;
             flex-grow: 1;
+
+            &[disabled]{
+                outline: none;
+                pointer-events: none;
+                opacity: 0.6;
+            }
             /*outline: none;*/
         }
     }
@@ -121,5 +171,12 @@
         width: 80%;
         margin: 0px auto;
         padding: 8px 30px;
+    }
+
+    .err{
+        width: 80%;
+        margin: 30px auto;
+        text-align: left;
+        color: #E84142;
     }
 </style>
