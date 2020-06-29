@@ -23,7 +23,7 @@
         },
         data(){
             return {
-                step: 2,
+                step: 0,
             }
         }
     }
