@@ -1,8 +1,9 @@
 const express = require('express');
 var history = require('connect-history-api-fallback');
+const helmet = require("helmet");
 
 const app = express();
-
+app.use(helmet());
 app.enable('trust proxy');
 
 app.use (function (req, res, next) {
@@ -12,7 +13,8 @@ app.use (function (req, res, next) {
         res.redirect('https://' + req.headers.host + req.url);
     }
 });
-
+app.use(helmet.xssFilter());
+app.use(helmet.frameguard());
 app.use(history());
 
 // Serving Static Files
