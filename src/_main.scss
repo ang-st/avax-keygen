@@ -5,8 +5,8 @@
 .but_primary{
   background-color: #E84142;
   color: #fff;
+  width: 100%;
   border-radius: 4px;
-  width: max-content;
   border: none;
   padding: 8px 16px;
   font-weight: bold;
@@ -89,7 +89,9 @@ p{
   text-align: left;
 }
 
-
+span.ava_red{
+  color: #F22F2A !important;
+}
 
 
 

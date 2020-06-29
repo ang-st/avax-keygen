@@ -1,9 +1,10 @@
 <template>
     <b-container>
 <!--        <transition-group name="fade" mode="out-in" tag="div">-->
-            <Intro v-if="stage==='intro'" @generateKey="generateKey" key="intro"></Intro>
-            <DownloadKeyfile v-else-if="stage==='keystore'" :mnemonic="mnemonic" :address="address" key="keystore" :key-pair="keyPair" @complete="afterDownload"></DownloadKeyfile>
-            <Final v-else-if="stage==='final'" :mnemonic="mnemonic" :address="address" key="final" @restart="restart"></Final>
+        <Intro v-if="stage==='intro'" @generateKey="generateKey" key="intro"></Intro>
+        <FormSteps v-else :mnemonic="mnemonic" :address="address" :key-pair="keyPair"></FormSteps>
+<!--        <DownloadKeyfile v-else-if="stage==='keystore'" :mnemonic="mnemonic" :address="address" key="keystore" :key-pair="keyPair" @complete="afterDownload"></DownloadKeyfile>-->
+<!--        <Final v-else-if="stage==='final'" :mnemonic="mnemonic" :address="address" key="final" @restart="restart"></Final>-->
 <!--        </transition-group>-->
 
     </b-container>
@@ -11,8 +12,9 @@
 
 <script>
     import Intro from "@/components/Intro";
-    import DownloadKeyfile from "@/components/DownloadKeyfile";
-    import Final from '@/components/Final';
+    // import DownloadKeyfile from "@/components/DownloadKeyfile";
+    import FormSteps from '@/components/FormSteps';
+    // import Final from '@/components/Final';
 
     import {Buffer} from "buffer/";
     import * as bip39 from 'bip39';
@@ -39,8 +41,9 @@
         name: 'Home',
         components:{
             Intro,
-            DownloadKeyfile,
-            Final
+            // DownloadKeyfile,
+            // Final,
+            FormSteps
             // MnemonicDisplay
         },
         data(){
