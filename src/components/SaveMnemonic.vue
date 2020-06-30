@@ -8,15 +8,16 @@
         </b-row>
         <b-row align-h="center">
             <b-col md="7">
-                <textarea class="mnemonic" :value="mnemonic"></textarea>
+                <p class="mnemonic" :value="mnemonic">{{mnemonic}}</p>
             </b-col>
             <b-col md="4" class="right_col" offset-md="1">
                 <b-form-checkbox :value="true"
                                  :unchecked-value="false"
-                                 v-model="isCheckbox">
+                                 v-model="isCheckbox" :disabled="isVerified">
                     I wrote down my mnemonic keyphrase.
                 </b-form-checkbox>
-                <button class="but_primary" @click="openVerify" :disabled="!canVerify">Verify</button>
+                <button v-if="!isVerified" class="but_primary" @click="openVerify" :disabled="!canVerify">Verify</button>
+                <button v-else class="but_primary" disabled><fa icon="check-circle"></fa></button>
             </b-col>
         </b-row>
     </div>
@@ -33,6 +34,7 @@
         data(){
             return {
                 isCheckbox: false,
+                isVerified: false,
             }
         },
         computed: {
@@ -48,6 +50,7 @@
                 this.$refs.verify.isActive = true;
             },
             complete(){
+                this.isVerified = true;
                 this.$emit('complete')
             },
         }
@@ -62,5 +65,7 @@
         text-align: center;
         border: 1px solid #CDCDCD;
         border-radius: 8px;
+        height: max-content;
+        background-color: transparent;
     }
 </style>

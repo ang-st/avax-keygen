@@ -68,8 +68,13 @@
                     let userWord = userWords[i].trim();
                     let trueWord = this.words[i].trim();
 
+                    if(userWord.length === 0){
+                        this.err = `Oops looks like you forgot to fill number ${i+1}`;
+                        return false;
+                    }
+
                     if(userWord !== trueWord){
-                        this.err = "The mnemonic phrase you entered does not match the actual phrase.";
+                        this.err = `The mnemonic phrase you entered for word ${i+1} not match the actual phrase.`;
                         return false;
                     }
                 }
@@ -124,6 +129,8 @@
         position: relative;
         background-color: #fff;
         padding: 40px 30px;
+        max-width: 100%;
+        width: 420px;
         z-index: 1;
         border-radius: 14px;
     }
@@ -133,7 +140,7 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 14px;
         font-size: 0.8rem;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
     }
 
     .mnemonic_in{
@@ -175,7 +182,8 @@
 
     .err{
         width: 80%;
-        margin: 30px auto;
+        height: 60px;
+        margin: 0px auto;
         text-align: left;
         color: #E84142;
     }
