@@ -1,8 +1,8 @@
 <template>
     <div class="steps" :step="step">
-        <DownloadKeyfile class="step_0" :mnemonic="mnemonic" :key-pair="keyPair" :address="address" @complete="step=1"></DownloadKeyfile>
+        <DownloadKeyfile class="step_0" :master_keypair="master_keypair" @complete="step=1"></DownloadKeyfile>
         <SaveMnemonic class="step_1" :mnemonic="mnemonic" @complete="step=2"></SaveMnemonic>
-        <CopyAddress class="step_2" :address="address"></CopyAddress>
+        <CopyAddress class="step_2" :address="hd_address"></CopyAddress>
     </div>
 </template>
 <script>
@@ -18,8 +18,8 @@
         },
         props: {
             mnemonic: String,
-            keyPair: Object,
-            address: String,
+            master_keypair: Object,
+            hd_address: String,
         },
         data(){
             return {

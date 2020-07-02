@@ -42,9 +42,7 @@
             }
         },
         props: {
-            keyPair: Object,
-            address: String,
-            mnemonic: String
+            master_keypair: Object,
         },
         components: {
             // KeyCard,
@@ -94,9 +92,9 @@
 
 
                 // Loop private keys, encrypt them and store in an array
-                let key = this.keyPair;
+                let key = this.master_keypair;
                 let pk = key.getPrivateKey();
-                let addr = this.address;
+                let addr = key.getAddressString();
 
                 let pk_crypt = await cryptoHelpers.encrypt(pass,pk,salt);
                 let key_data = {
@@ -122,7 +120,7 @@
                 let text = JSON.stringify(file_data);
 
 
-                let filename = `AVA_${addr}`;
+                let filename = `AVA_${addr.split('-')[1]}`;
 
                 var blob = new Blob(
                     [ text ],

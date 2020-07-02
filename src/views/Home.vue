@@ -1,7 +1,7 @@
 <template>
     <b-container>
         <Intro v-if="stage==='intro'" @generateKey="generateKey" key="intro"></Intro>
-        <FormSteps v-else :mnemonic="mnemonic" :address="address" :key-pair="keyPair"></FormSteps>
+        <FormSteps v-else :mnemonic="mnemonic" :hd_address="hdAddress" :master_keypair="master_keypair"></FormSteps>
     </b-container>
 </template>
 
@@ -48,12 +48,11 @@
         },
         data(){
             return {
-                keyPair: null,
+                master_keypair: null,
                 keyChain: null,
                 isKeyDownloaded: false,
                 keyPhrase: "",
-                newPrivateKey: "",
-                address: "",
+                hdAddress: "",
                 mnemonic: ""
             }
         },
@@ -63,7 +62,6 @@
                 this.keyChain = null;
                 this.isKeyDownloaded = false;
                 this.keyPhrase = "";
-                this.newPrivateKey = "";
                 this.address = "";
                 this.mnemonic = "";
             },
@@ -71,6 +69,7 @@
             generateKey(){
                 let mnemonic = bip39.generateMnemonic(256);
 
+                // Get HD Key
                 let seed = bip39.mnemonicToSeedSync(mnemonic);
                 let hdkey = HDKey.fromMasterSeed(seed);
 
@@ -80,15 +79,16 @@
                 let pkBuf = new Buffer(pkHex, 'hex');
                 let addr = keyChain.importKey(pkBuf);
 
-                // let entropy = bip39.mnemonicToEntropy(mnemonic);
-                // let b = new Buffer(entropy, 'hex');
-                //
-                // const addr = keyChain.importKey(b);
-                const keypair = keyChain.getKey(addr);
+                // Get master key
+                let entropy = bip39.mnemonicToEntropy(mnemonic);
+                let b = new Buffer(entropy, 'hex');
+                const masterAddr = keyChain.importKey(b);
 
-                this.keyPair = keypair;
-                this.address = keypair.getAddressString();
-                this.newPrivateKey = keypair.getPrivateKeyString();
+                const masterKeypair = keyChain.getKey(masterAddr);
+                const hdKeypair = keyChain.getKey(addr);
+
+                this.master_keypair = masterKeypair;
+                this.hdAddress = hdKeypair.getAddressString();
                 this.mnemonic = mnemonic;
             },
 
