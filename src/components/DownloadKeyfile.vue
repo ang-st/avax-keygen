@@ -98,14 +98,11 @@
                 let pk = key.getPrivateKey();
                 let addr = this.address;
 
-                const KEY_TYPE = 'singleton';
-
                 let pk_crypt = await cryptoHelpers.encrypt(pass,pk,salt);
                 let key_data = {
                     key: bintools.avaSerialize(pk_crypt.ciphertext),
                     nonce: bintools.avaSerialize(pk_crypt.nonce),
                     address: addr,
-                    type: KEY_TYPE
                 };
 
                 let keys = [key_data];

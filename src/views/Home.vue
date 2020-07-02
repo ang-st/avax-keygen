@@ -13,6 +13,7 @@
 
     import {Buffer} from "buffer/";
     import * as bip39 from 'bip39';
+    import HDKey from 'hdkey';
     import * as avalanche from 'avalanche';
 
     // import MnemonicDisplay from '@/components/misc/MnemonicDisplay';
@@ -30,6 +31,10 @@
     const cryptoHelpers = avalanche.CryptoHelpers;
     const bintools = avalanche.BinTools.getInstance();
 
+
+    // m / purpose' / coin_type' / account' / change / address_index
+    const AVA_TOKEN_INDEX = "9000";
+    const HD_PATH = `m/44'/${AVA_TOKEN_INDEX}'/0'/0/0`; // Path that will derive the first key
 
 
     export default {
@@ -65,10 +70,20 @@
 
             generateKey(){
                 let mnemonic = bip39.generateMnemonic(256);
-                let entropy = bip39.mnemonicToEntropy(mnemonic);
-                let b = new Buffer(entropy, 'hex');
 
-                const addr = keyChain.importKey(b);
+                let seed = bip39.mnemonicToSeedSync(mnemonic);
+                let hdkey = HDKey.fromMasterSeed(seed);
+
+                let key = hdkey.derive(HD_PATH);
+
+                let pkHex = key.privateKey.toString('hex');
+                let pkBuf = new Buffer(pkHex, 'hex');
+                let addr = keyChain.importKey(pkBuf);
+
+                // let entropy = bip39.mnemonicToEntropy(mnemonic);
+                // let b = new Buffer(entropy, 'hex');
+                //
+                // const addr = keyChain.importKey(b);
                 const keypair = keyChain.getKey(addr);
 
                 this.keyPair = keypair;
