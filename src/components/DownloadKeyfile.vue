@@ -120,7 +120,7 @@
                 let text = JSON.stringify(file_data);
 
 
-                let filename = `AVA_${addr.split('-')[1]}`;
+                let filename = `AVAX_${addr.split('-')[1]}`;
 
                 var blob = new Blob(
                     [ text ],
