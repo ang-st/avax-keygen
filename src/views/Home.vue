@@ -28,8 +28,6 @@
     const ava = new avalanche.Avalanche(IP, parseInt(PORT), PROTOCOL, parseInt(NETWORK_ID), CHAIN_ID);
     const avm = ava.AVM();
     const keyChain = avm.keyChain();
-    const cryptoHelpers = avalanche.CryptoHelpers;
-    const bintools = avalanche.BinTools.getInstance();
 
 
     // m / purpose' / coin_type' / account' / change / address_index
