@@ -9,7 +9,7 @@
                                      :unchecked-value="false"
                                      v-model="isCheckbox"
                     >
-                        I understand and agree to the Terms of Use.
+                        I understand and agree to the <a href="/terms_of_use.pdf" target="_blank">Terms of Use</a>.
                     </b-form-checkbox>
                     <button class="but_primary" @click="generateKey" :disabled="!canSubmit">Generate Key</button>
                 </div>
