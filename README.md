@@ -11,7 +11,7 @@ For use with token sale. A simple application that lets users create a mnemonic 
 2. Go to the root of the project `cd avax-keygen`
 3. Install dependencies `yarn install`
 
-## To run locally and hot-releod furing development
+## To run locally and hot-reload during development
 ```
 yarn serve
 ```
