@@ -1,4 +1,4 @@
-# AVA Keygen
+# AVAX Keygen
 For use with token sale. A simple application that lets users create a mnemonic phrase, and download a keystore file.
 
 
@@ -7,8 +7,8 @@ For use with token sale. A simple application that lets users create a mnemonic 
 - Node v12.14.1
 
 ## Installation
-1. Clone the repo `git clone https://github.com/ava-labs/ava-keygen.git`
-2. Go to the root of the project `cd ava-keygen`
+1. Clone the repo `git clone https://github.com/ava-labs/avax-keygen.git`
+2. Go to the root of the project `cd avax-keygen`
 3. Install dependencies `yarn install`
 
 ## To run locally and hot-releod furing development
