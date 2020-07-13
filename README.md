@@ -17,5 +17,5 @@ yarn serve
 ```
 
 ## Deployment
-1 - Compile and minify for production with `yarn build`
-2 - Serve from `/dist` directory
+1. Compile and minify for production with `yarn build`
+2. Serve from `/dist` directory
